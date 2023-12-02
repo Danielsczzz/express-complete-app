@@ -25,6 +25,24 @@ export const createUser = async (req, res) => {
   res.sendStatus(204);
 };
 
+export const getLogin = (req, res) => {
+  res.send("Login page");
+};
+
+export const verifyUser = async (req, res) => {
+  const user = req.body;
+  let [records] = await pool.query(
+    "SELECT * FROM users WHERE mail = ? AND password = ?",
+    [user.mail, user.password]
+  );
+  res.redirect(307, "/mainPage?mail=" + records[0].mail);
+};
+
+export const getMainPage = (req, res) => {
+  const mail = req.query.mail;
+  res.send("Hello " + mail);
+};
+
 function validateUser(user) {
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   if (!emailRegex.test(user.mail) || user.password.length < 4) {
@@ -33,3 +51,15 @@ function validateUser(user) {
 
   return true;
 }
+
+const controllers = {
+  ping,
+  getIndexPage,
+  getRegister,
+  createUser,
+  getLogin,
+  verifyUser,
+  getMainPage,
+};
+
+export default controllers;

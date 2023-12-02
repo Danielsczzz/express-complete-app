@@ -1,7 +1,8 @@
 // Imports
 import express from "express";
 import morgan from "morgan";
-import { router } from "./routes/routes.js";
+import { indexRouter } from "./routes/index.routes.js";
+import { appRouter } from "./routes/app.routes.js";
 
 const app = express();
 
@@ -12,7 +13,8 @@ app.set("port", 4000);
 // middlewares
 app.use(morgan("dev"));
 app.use(express.json());
-app.use(router);
+app.use(indexRouter);
+app.use(appRouter);
 
 app.listen(app.get("port"));
 console.log(
