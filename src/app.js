@@ -2,7 +2,6 @@
 import express from "express";
 import morgan from "morgan";
 import { router } from "./routes/routes.js";
-import { pool } from "./db.js";
 
 const app = express();
 
@@ -14,12 +13,6 @@ app.set("port", 4000);
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(router);
-
-// Test routes
-app.get("/ping", async (req, res) => {
-  const [result] = await pool.query("SELECT 1+1 AS result");
-  res.json(result);
-});
 
 app.listen(app.get("port"));
 console.log(

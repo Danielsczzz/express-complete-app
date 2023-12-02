@@ -1,16 +1,21 @@
 import { Router } from "express";
+import {
+  getIndexPage,
+  getRegister,
+  createUser,
+  ping,
+  verifyUser,
+} from "../controllers/controllers.js";
 
 export const router = Router();
 
-router.get("/", (req, res) => {
-  res.send("Hello world");
-});
+// Test route
+router.get("/ping", ping);
 
-router.get("/register", (req, res) => {
-  res.send("Register page");
-});
+router.get("/", getIndexPage);
 
-router.post("/register", (req, res) => {
-  const newUser = req.body;
-  res.json(newUser);
-});
+router.get("/register", getRegister);
+
+router.post("/register", createUser);
+
+router.post("/login", verifyUser);
