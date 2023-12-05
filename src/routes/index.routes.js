@@ -3,9 +3,6 @@ import controllers from "../controllers/controllers.js";
 
 export const indexRouter = Router();
 
-// Test route
-indexRouter.get("/ping", controllers.ping);
-
 indexRouter.get("/", controllers.getIndexPage);
 
 indexRouter.get("/register", controllers.getRegister);
