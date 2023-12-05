@@ -40,11 +40,11 @@ export const verifyUser = async (req, res) => {
   });
 
   if (findedUser === null)
-    return res.status(400).send("This mail address are not registered");
+    return res.status(400).send("This credentials are not correct");
   const match = await bcrypt.compare(password, findedUser.password);
   match
     ? res.redirect(307, "/mainPage")
-    : res.status(400).send("the password doesn't match");
+    : res.status(400).send("This credentials are not correct");
 };
 
 export const getMainPage = (req, res) => {
